@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JOHN KAISH ELECTRONICS • Electrical & Electronics Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@400;500;600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --navy: #0a1628;
+            --dark-navy: #060e1a;
+            --orange: #f97316;
+            --green: #22c55e;
+            --blue: #1e3a8a;
+            --light-blue: #3b82f6;
+            --circuit-color: rgba(34, 197, 94, 0.15);
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            background-color: var(--dark-navy);
+            color: #e2e8f0;
+            font-family: 'Exo 2', sans-serif;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .brand-font { font-family: 'Rajdhani', sans-serif; }
+        .mono { font-family: 'Share Tech Mono', monospace; }
+
+        /* Circuit board background pattern */
+        .circuit-bg {
+            background-color: var(--dark-navy);
+            background-image:
+                linear-gradient(rgba(34,197,94,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(34,197,94,0.03) 1px, transparent 1px),
+                radial-gradient(circle at 20% 50%, rgba(249,115,22,0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(30,58,138,0.15) 0%, transparent 50%);
+            background-size: 40px 40px, 40px 40px, 100% 100%, 100% 100%;
+        }
+
+        /* Glowing circuit lines */
+        .circuit-lines {
+            position: relative;
+            overflow: hidden;
+        }
+        .circuit-lines::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image:
+                linear-gradient(90deg, transparent 0%, rgba(34,197,94,0.08) 50%, transparent 100%),
+                repeating-linear-gradient(0deg, transparent, transparent 38px, rgba(34,197,94,0.05) 38px, rgba(34,197,94,0.05) 40px),
+                repeating-linear-gradient(90deg, transparent, transparent 38px, rgba(34,197,94,0.05) 38px, rgba(34,197,94,0.05) 40px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Hero section */
+        .hero-bg {
+            background:
+                linear-gradient(135deg, rgba(6,14,26,0.92) 0%, rgba(10,22,40,0.85) 50%, rgba(6,14,26,0.95) 100%),
+                url('https://images.unsplash.com/photo-1518770660439-4636190af475?w=1800') center/cover no-repeat;
+            position: relative;
+        }
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 30% 50%, rgba(249,115,22,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 30%, rgba(34,197,94,0.06) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        /* Glowing orange/green text */
+        .text-orange-glow { color: #f97316; text-shadow: 0 0 20px rgba(249,115,22,0.5); }
+        .text-green-glow { color: #22c55e; text-shadow: 0 0 20px rgba(34,197,94,0.5); }
+        .text-blue-glow { color: #60a5fa; text-shadow: 0 0 20px rgba(96,165,250,0.4); }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(6,14,26,0.95);
+            border-bottom: 1px solid rgba(34,197,94,0.2);
+            backdrop-filter: blur(12px);
+        }
+
+        .nav-link {
+            position: relative;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0; height: 2px;
+            bottom: -4px; left: 0;
+            background: linear-gradient(90deg, #f97316, #22c55e);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after { width: 100%; }
+        .nav-link:hover { color: #f97316; }
+
+        /* Logo */
+        .logo-img { height: 56px; width: auto; }
+
+        /* Cards */
+        .card-dark {
+            background: linear-gradient(135deg, rgba(10,22,40,0.9), rgba(6,14,26,0.95));
+            border: 1px solid rgba(34,197,94,0.15);
+            transition: all 0.3s ease;
+        }
+        .card-dark:hover {
+            border-color: rgba(249,115,22,0.4);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(249,115,22,0.1), 0 0 20px rgba(34,197,94,0.05);
+        }
+
+        .product-card {
+            background: linear-gradient(145deg, rgba(10,22,40,0.95), rgba(6,14,26,1));
+            border: 1px solid rgba(34,197,94,0.12);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .product-card:hover {
+            transform: translateY(-12px);
+            border-color: rgba(249,115,22,0.5);
+            box-shadow: 0 25px 50px rgba(249,115,22,0.12), 0 0 30px rgba(34,197,94,0.06);
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            color: white;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            border-radius: 8px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(249,115,22,0.3);
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #fb923c, #f97316);
+            box-shadow: 0 6px 25px rgba(249,115,22,0.5);
+            transform: translateY(-2px);
+        }
+
+        .btn-green {
+            background: linear-gradient(135deg, #16a34a, #15803d);
+            color: white;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+            border-radius: 8px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(34,197,94,0.25);
+        }
+        .btn-green:hover {
+            box-shadow: 0 6px 25px rgba(34,197,94,0.4);
+            transform: translateY(-2px);
+        }
+
+        /* Section titles */
+        .section-tag {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            color: #f97316;
+            text-transform: uppercase;
+        }
+
+        /* Category icons */
+        .cat-card {
+            background: linear-gradient(135deg, rgba(10,22,40,0.9), rgba(6,14,26,0.95));
+            border: 1px solid rgba(34,197,94,0.1);
+            border-radius: 16px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .cat-card:hover {
+            border-color: #f97316;
+            background: linear-gradient(135deg, rgba(249,115,22,0.08), rgba(6,14,26,0.95));
+            transform: translateY(-6px);
+        }
+        .cat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Divider */
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #f97316, #22c55e, transparent);
+        }
+
+        /* Stats */
+        .stat-card {
+            border-left: 3px solid #f97316;
+            padding-left: 1rem;
+        }
+
+        /* WhatsApp floating button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 9999;
+            width: 62px;
+            height: 62px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            box-shadow: 0 6px 25px rgba(37,211,102,0.5);
+            transition: all 0.3s;
+            animation: pulse-green 2.5s infinite;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 35px rgba(37,211,102,0.7);
+        }
+        @keyframes pulse-green {
+            0%, 100% { box-shadow: 0 6px 25px rgba(37,211,102,0.5); }
+            50% { box-shadow: 0 6px 35px rgba(37,211,102,0.8), 0 0 0 8px rgba(37,211,102,0.1); }
+        }
+
+        /* Mobile menu */
+        .mobile-menu {
+            display: none;
+            background: rgba(6,14,26,0.98);
+            border-top: 1px solid rgba(34,197,94,0.2);
+        }
+        .mobile-menu.open { display: block; }
+
+        /* Map container */
+        .map-container {
+            border: 1px solid rgba(34,197,94,0.25);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        /* Animate on scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--dark-navy); }
+        ::-webkit-scrollbar-thumb { background: #f97316; border-radius: 3px; }
+
+        /* Tagline dots */
+        .tagline-dot { color: #f97316; margin: 0 8px; }
+
+        /* Service badge */
+        .service-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(249,115,22,0.1);
+            border: 1px solid rgba(249,115,22,0.3);
+            border-radius: 100px;
+            padding: 6px 16px;
+            font-size: 0.8rem;
+            font-family: 'Share Tech Mono', monospace;
+            color: #f97316;
+        }
+
+        /* Testimonial */
+        .testimonial-card {
+            background: linear-gradient(135deg, rgba(10,22,40,0.9), rgba(6,14,26,1));
+            border: 1px solid rgba(34,197,94,0.12);
+            border-radius: 16px;
+            padding: 2rem;
+        }
+        .testimonial-card:hover {
+            border-color: rgba(34,197,94,0.35);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(180deg, rgba(6,14,26,1) 0%, #020810 100%);
+            border-top: 1px solid rgba(34,197,94,0.15);
+        }
+
+        /* Overlay panels */
+        .overlay-panel {
+            position: fixed;
+            top: 0; right: -100%;
+            width: 400px;
+            max-width: 95vw;
+            height: 100%;
+            background: rgba(6,14,26,0.98);
+            border-left: 1px solid rgba(34,197,94,0.2);
+            z-index: 1000;
+            transition: right 0.3s ease;
+            overflow-y: auto;
+            backdrop-filter: blur(20px);
+        }
+        .overlay-panel.open { right: 0; }
+        .overlay-bg {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            z-index: 999;
+            display: none;
+        }
+        .overlay-bg.open { display: block; }
+    </style>
+</head>
+<body class="circuit-bg">
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/254713496692" target="_blank" class="whatsapp-float" title="Chat on WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- Overlay Background -->
+    <div id="overlay-bg" class="overlay-bg" onclick="closeAllPanels()"></div>
+
+    <!-- Cart Panel -->
+    <div id="cart-panel" class="overlay-panel">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-2xl brand-font font-bold text-orange-glow">CART</h2>
+                <button onclick="closeAllPanels()" class="text-zinc-400 hover:text-white text-2xl"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div id="cart-items" class="space-y-4">
+                <p class="text-zinc-500 mono text-sm">// Cart is empty</p>
+            </div>
+            <div id="cart-total" class="mt-8 pt-6 border-t border-zinc-800 hidden">
+                <div class="flex justify-between mb-4 text-lg font-bold">
+                    <span>TOTAL</span>
+                    <span id="total-price" class="text-orange-glow"></span>
+                </div>
+                <a href="https://wa.me/254713496692?text=Hello%20John%20Kaish%20Electronics!%20I%20would%20like%20to%20place%20an%20order." 
+                   target="_blank" class="btn-green w-full py-3 flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-whatsapp"></i> ORDER VIA WHATSAPP
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
+            <a href="#home" class="flex items-center gap-x-3">
+                <img src="https://i.imgur.com/placeholder.png" 
+                     onerror="this.onerror=null; this.style.display='none'; document.getElementById('text-logo').style.display='flex';"
+                     class="logo-img" alt="John Kaish Logo" id="img-logo">
+                <div id="text-logo" class="flex items-center gap-x-3">
+                    <div class="w-12 h-12 rounded-xl flex items-center justify-center font-black text-xl"
+                         style="background: linear-gradient(135deg, #1e3a8a, #0a1628); border: 2px solid #f97316;">
+                        <span style="color:#f97316;">J</span><span style="color:#22c55e;">K</span>
+                    </div>
+                    <div>
+                        <div class="font-black tracking-wider text-lg leading-none" style="font-family:'Rajdhani',sans-serif;">
+                            <span style="color:#1e40af;">JOHN </span><span style="color:#22c55e;">KAISH</span>
+                        </div>
+                        <div class="text-xs tracking-widest text-orange-400" style="font-family:'Share Tech Mono',monospace;">ELECTRICAL & ELECTRONICS</div>
+                    </div>
+                </div>
+            </a>
+
+            <div class="hidden md:flex items-center gap-x-7 text-sm">
+                <a href="#home" class="nav-link text-zinc-300">HOME</a>
+                <a href="#services" class="nav-link text-zinc-300">SERVICES</a>
+                <a href="#shop" class="nav-link text-zinc-300">SHOP</a>
+                <a href="#about" class="nav-link text-zinc-300">ABOUT</a>
+                <a href="#location" class="nav-link text-zinc-300">LOCATION</a>
+                <a href="#contact" class="nav-link text-zinc-300">CONTACT</a>
+            </div>
+
+            <div class="flex items-center gap-x-4">
+                <button onclick="toggleCart()" class="relative text-zinc-400 hover:text-orange-400 transition-colors">
+                    <i class="fa-solid fa-cart-shopping text-xl"></i>
+                    <span id="cart-count" class="absolute -top-2 -right-2 text-white text-[10px] font-mono w-5 h-5 flex items-center justify-center rounded-full" style="background:#f97316;">0</span>
+                </button>
+                <a href="https://wa.me/254713496692" target="_blank"
+                   class="hidden md:flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-bold" style="background:#25D366; color:white; font-family:'Rajdhani',sans-serif; letter-spacing:1px;">
+                    <i class="fa-brands fa-whatsapp"></i> WHATSAPP
+                </a>
+                <button onclick="toggleMobileMenu()" class="md:hidden text-2xl text-zinc-300">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu">
+            <div class="px-6 py-4 space-y-4">
+                <a href="#home" onclick="closeMobileMenu()" class="block py-2 text-zinc-300 hover:text-orange-400 nav-link font-semibold">HOME</a>
+                <a href="#services" onclick="closeMobileMenu()" class="block py-2 text-zinc-300 hover:text-orange-400 nav-link font-semibold">SERVICES</a>
+                <a href="#shop" onclick="closeMobileMenu()" class="block py-2 text-zinc-300 hover:text-orange-400 nav-link font-semibold">SHOP</a>
+                <a href="#about" onclick="closeMobileMenu()" class="block py-2 text-zinc-300 hover:text-orange-400 nav-link font-semibold">ABOUT</a>
+                <a href="#location" onclick="closeMobileMenu()" class="block py-2 text-zinc-300 hover:text-orange-400 nav-link font-semibold">LOCATION</a>
+                <a href="#contact" onclick="closeMobileMenu()" class="block py-2 text-zinc-300 hover:text-orange-400 nav-link font-semibold">CONTACT</a>
+                <a href="https://wa.me/254713496692" target="_blank" class="flex items-center gap-2 py-2 text-green-400 font-semibold">
+                    <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section id="home" class="hero-bg min-h-screen flex items-center circuit-lines relative">
+        <div class="max-w-7xl mx-auto px-6 py-24 relative z-10 w-full">
+            <div class="max-w-4xl">
+                <div class="service-badge mb-6 fade-in">
+                    <span class="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></span>
+                    INNOVATE • REPAIR • POWER • CONNECT
+                </div>
+                <h1 class="text-5xl md:text-7xl font-black tracking-tight leading-none mb-4 fade-in" style="font-family:'Rajdhani',sans-serif;">
+                    <span style="color:#1e40af;">JOHN </span><span style="color:#22c55e;">KAISH</span><br>
+                    <span class="text-white">ELECTRICAL &</span><br>
+                    <span class="text-orange-glow">ELECTRONICS</span>
+                </h1>
+                <p class="text-lg text-zinc-400 mb-4 fade-in" style="font-family:'Share Tech Mono',monospace; letter-spacing:2px;">
+                    ENGINEERING AND ELECTRONICS SOLUTIONS
+                </p>
+                <p class="text-zinc-300 text-lg mb-10 max-w-2xl fade-in">
+                    Your trusted partner for quality electronics, electrical engineering, repairs, and smart tech solutions across <span class="text-orange-400 font-semibold">Nairobi, Murang'a & Embu, Kenya</span>.
+                </p>
+                <div class="flex flex-wrap gap-4 fade-in">
+                    <a href="#shop" class="btn-primary px-8 py-4 text-lg inline-flex items-center gap-2">
+                        <i class="fa-solid fa-bolt"></i> SHOP NOW
+                    </a>
+                    <a href="#services" class="px-8 py-4 text-lg inline-flex items-center gap-2 rounded-lg font-bold transition-all"
+                       style="border:2px solid rgba(34,197,94,0.5); color:#22c55e; font-family:'Rajdhani',sans-serif; letter-spacing:1px;">
+                        <i class="fa-solid fa-screwdriver-wrench"></i> OUR SERVICES
+                    </a>
+                    <a href="https://wa.me/254713496692" target="_blank"
+                       class="btn-green px-8 py-4 text-lg inline-flex items-center gap-2">
+                        <i class="fa-brands fa-whatsapp"></i> WHATSAPP US
+                    </a>
+                </div>
+
+                <!-- Stats -->
+                <div class="grid grid-cols-3 gap-6 mt-16 max-w-lg fade-in">
+                    <div class="stat-card">
+                        <div class="text-3xl font-black text-orange-glow" style="font-family:'Rajdhani',sans-serif;">500+</div>
+                        <div class="text-zinc-500 text-sm mono">Clients Served</div>
+                    </div>
+                    <div class="stat-card" style="border-color:#22c55e;">
+                        <div class="text-3xl font-black text-green-glow" style="font-family:'Rajdhani',sans-serif;">3</div>
+                        <div class="text-zinc-500 text-sm mono">Locations</div>
+                    </div>
+                    <div class="stat-card" style="border-color:#3b82f6;">
+                        <div class="text-3xl font-black text-blue-glow" style="font-family:'Rajdhani',sans-serif;">5★</div>
+                        <div class="text-zinc-500 text-sm mono">Rated Service</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-zinc-600 animate-bounce">
+            <i class="fa-solid fa-chevron-down text-2xl"></i>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- SERVICES -->
+    <section id="services" class="py-24 circuit-lines">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <div class="section-tag mb-3">// WHAT WE DO</div>
+                <h2 class="text-5xl font-black" style="font-family:'Rajdhani',sans-serif;">
+                    OUR <span class="text-orange-glow">SERVICES</span>
+                </h2>
+                <p class="text-zinc-400 mt-4 max-w-xl mx-auto">Professional electrical and electronics solutions you can trust</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Service Cards -->
+                <div class="cat-card fade-in">
+                    <div class="cat-icon text-orange-400"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                    <h3 class="text-xl font-bold mb-2" style="font-family:'Rajdhani',sans-serif; color:#f97316;">Phone & Gadget Repair</h3>
+                    <p class="text-zinc-400 text-sm">Screen replacement, battery, charging port, software issues for all brands.</p>
+                </div>
+                <div class="cat-card fade-in">
+                    <div class="cat-icon text-green-400"><i class="fa-solid fa-plug-circle-bolt"></i></div>
+                    <h3 class="text-xl font-bold mb-2" style="font-family:'Rajdhani',sans-serif; color:#22c55e;">Electrical Installation</h3>
+                    <p class="text-zinc-400 text-sm">Residential & commercial wiring, switchboards, solar systems installation.</p>
+                </div>
+                <div class="cat-card fade-in">
+                    <div class="cat-icon text-blue-400"><i class="fa-solid fa-laptop"></i></div>
+                    <h3 class="text-xl font-bold mb-2" style="font-family:'Rajdhani',sans-serif; color:#60a5fa;">Laptop & PC Repair</h3>
+                    <p class="text-zinc-400 text-sm">Hardware repairs, software installation, virus removal, upgrades.</p>
+                </div>
+                <div class="cat-card fade-in">
+                    <div class="cat-icon text-orange-400"><i class="fa-solid fa-solar-panel"></i></div>
+                    <h3 class="text-xl font-bold mb-2" style="font-family:'Rajdhani',sans-serif; color:#f97316;">Solar Systems</h3>
+                    <p class="text-zinc-400 text-sm">Design, supply and installation of solar power systems for home and business.</p>
+                </div>
+                <div class="cat-card fade-in">
+                    <div class="cat-icon text-green-400"><i class="fa-solid fa-camera"></i></div>
+                    <h3 class="text-xl font-bold mb-2" style="font-family:'Rajdhani',sans-serif; color:#22c55e;">CCTV Installation</h3>
+                    <p class="text-zinc-400 text-sm">Security camera setup, monitoring systems, access control solutions.</p>
+                </div>
+                <div class="cat-card fade-in">
+                    <div class="cat-icon text-blue-400"><i class="fa-solid fa-wifi"></i></div>
+                    <h3 class="text-xl font-bold mb-2" style="font-family:'Rajdhani',sans-serif; color:#60a5fa;">Networking & Internet</h3>
+                    <p class="text-zinc-400 text-sm">WiFi setup, LAN/WAN networking, router configuration, internet solutions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- SHOP -->
+    <section id="shop" class="py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <div class="section-tag mb-3">// ELECTRONICS STORE</div>
+                <h2 class="text-5xl font-black" style="font-family:'Rajdhani',sans-serif;">
+                    FEATURED <span class="text-green-glow">PRODUCTS</span>
+                </h2>
+                <p class="text-zinc-400 mt-4">Quality gadgets at honest prices</p>
+            </div>
+
+            <!-- Filter -->
+            <div class="flex flex-wrap gap-3 mb-10 justify-center fade-in" id="filter-btns">
+                <button onclick="filterProducts('all')" class="filter-btn active px-5 py-2 rounded-lg text-sm font-bold mono" data-cat="all">ALL</button>
+                <button onclick="filterProducts('smartphones')" class="filter-btn px-5 py-2 rounded-lg text-sm font-bold mono" data-cat="smartphones">PHONES</button>
+                <button onclick="filterProducts('laptops')" class="filter-btn px-5 py-2 rounded-lg text-sm font-bold mono" data-cat="laptops">LAPTOPS</button>
+                <button onclick="filterProducts('headphones')" class="filter-btn px-5 py-2 rounded-lg text-sm font-bold mono" data-cat="headphones">AUDIO</button>
+                <button onclick="filterProducts('accessories')" class="filter-btn px-5 py-2 rounded-lg text-sm font-bold mono" data-cat="accessories">ACCESSORIES</button>
+            </div>
+
+            <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ABOUT -->
+    <section id="about" class="py-24 circuit-lines">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="fade-in">
+                    <div class="section-tag mb-3">// ABOUT US</div>
+                    <h2 class="text-5xl font-black mb-6" style="font-family:'Rajdhani',sans-serif;">
+                        ENGINEERING <span class="text-orange-glow">EXCELLENCE</span><br>
+                        SINCE DAY ONE
+                    </h2>
+                    <p class="text-zinc-400 mb-6 leading-relaxed">
+                        John Kaish Electrical & Electronics is a leading provider of engineering and electronics solutions based in Kenya. 
+                        We serve clients across <span class="text-orange-400">Nairobi, Murang'a, and Embu</span> with professional, reliable, and affordable services.
+                    </p>
+                    <p class="text-zinc-400 mb-8 leading-relaxed">
+                        From phone repairs to full electrical installations, solar systems to CCTV setups — we bring expertise, honesty, and 
+                        dedication to every job. Our mission is to <span class="text-green-400">innovate, repair, power, and connect</span> communities across Kenya.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="card-dark rounded-xl p-4">
+                            <i class="fa-solid fa-award text-2xl text-orange-400 mb-2 block"></i>
+                            <div class="font-bold text-sm" style="font-family:'Rajdhani',sans-serif;">CERTIFIED ENGINEERS</div>
+                            <p class="text-zinc-500 text-xs mt-1">Qualified & experienced team</p>
+                        </div>
+                        <div class="card-dark rounded-xl p-4">
+                            <i class="fa-solid fa-clock text-2xl text-green-400 mb-2 block"></i>
+                            <div class="font-bold text-sm" style="font-family:'Rajdhani',sans-serif;">FAST TURNAROUND</div>
+                            <p class="text-zinc-500 text-xs mt-1">Same-day repairs available</p>
+                        </div>
+                        <div class="card-dark rounded-xl p-4">
+                            <i class="fa-solid fa-shield-halved text-2xl text-blue-400 mb-2 block"></i>
+                            <div class="font-bold text-sm" style="font-family:'Rajdhani',sans-serif;">WARRANTY REPAIRS</div>
+                            <p class="text-zinc-500 text-xs mt-1">All repairs guaranteed</p>
+                        </div>
+                        <div class="card-dark rounded-xl p-4">
+                            <i class="fa-solid fa-handshake text-2xl text-orange-400 mb-2 block"></i>
+                            <div class="font-bold text-sm" style="font-family:'Rajdhani',sans-serif;">HONEST PRICING</div>
+                            <p class="text-zinc-500 text-xs mt-1">No hidden charges</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonials -->
+                <div class="space-y-4 fade-in">
+                    <div class="section-tag mb-3">// WHAT CLIENTS SAY</div>
+                    <div class="testimonial-card">
+                        <div class="flex gap-1 mb-3 text-orange-400">★★★★★</div>
+                        <p class="text-zinc-300 text-sm italic mb-3">"John Kaish fixed my laptop the same day. Very professional and affordable. Highly recommend!"</p>
+                        <div class="text-zinc-500 mono text-xs">— Peter M., Embu</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="flex gap-1 mb-3 text-orange-400">★★★★★</div>
+                        <p class="text-zinc-300 text-sm italic mb-3">"Best electronics shop in Murang'a. Got my phone screen replaced quickly and at a fair price."</p>
+                        <div class="text-zinc-500 mono text-xs">— Grace W., Murang'a</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="flex gap-1 mb-3 text-orange-400">★★★★★</div>
+                        <p class="text-zinc-300 text-sm italic mb-3">"Installed solar panels for my home. Excellent workmanship and great after-sale support."</p>
+                        <div class="text-zinc-500 mono text-xs">— James K., Nairobi</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- LOCATION & MAP -->
+    <section id="location" class="py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <div class="section-tag mb-3">// FIND US</div>
+                <h2 class="text-5xl font-black" style="font-family:'Rajdhani',sans-serif;">
+                    OUR <span class="text-orange-glow">LOCATIONS</span>
+                </h2>
+                <p class="text-zinc-400 mt-4">Visit us at any of our outlets across Kenya</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 fade-in">
+                <div class="card-dark rounded-2xl p-6 text-center">
+                    <i class="fa-solid fa-location-dot text-3xl text-orange-400 mb-4 block"></i>
+                    <h3 class="text-xl font-black text-orange-400 mb-1" style="font-family:'Rajdhani',sans-serif;">EMBU</h3>
+                    <p class="text-zinc-400 text-sm">Main Branch — Embu Town, Kenya</p>
+                    <div class="mt-3 text-green-400 text-xs mono">● OPEN Mon–Sat</div>
+                </div>
+                <div class="card-dark rounded-2xl p-6 text-center">
+                    <i class="fa-solid fa-location-dot text-3xl text-green-400 mb-4 block"></i>
+                    <h3 class="text-xl font-black text-green-400 mb-1" style="font-family:'Rajdhani',sans-serif;">MURANG'A</h3>
+                    <p class="text-zinc-400 text-sm">Murang'a Town, Kenya</p>
+                    <div class="mt-3 text-green-400 text-xs mono">● OPEN Mon–Sat</div>
+                </div>
+                <div class="card-dark rounded-2xl p-6 text-center">
+                    <i class="fa-solid fa-location-dot text-3xl text-blue-400 mb-4 block"></i>
+                    <h3 class="text-xl font-black text-blue-400 mb-1" style="font-family:'Rajdhani',sans-serif;">NAIROBI</h3>
+                    <p class="text-zinc-400 text-sm">Nairobi City, Kenya</p>
+                    <div class="mt-3 text-green-400 text-xs mono">● OPEN Mon–Sat</div>
+                </div>
+            </div>
+
+            <!-- Google Map - Embu, Kenya -->
+            <div class="map-container fade-in">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63819.041898395615!2d37.42833499999999!3d-0.5266534!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182a9e56d6be1fcb%3A0xd5a42eef18e47d49!2sEmbu%2C%20Kenya!5e0!3m2!1sen!2s!4v1716800000000!5m2!1sen!2s"
+                    width="100%"
+                    height="450"
+                    style="border:0; display:block;"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- CONTACT -->
+    <section id="contact" class="py-24 circuit-lines">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <div class="section-tag mb-3">// GET IN TOUCH</div>
+                <h2 class="text-5xl font-black" style="font-family:'Rajdhani',sans-serif;">
+                    CONTACT <span class="text-green-glow">US</span>
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto fade-in">
+                <a href="tel:0713496692" class="card-dark rounded-2xl p-8 text-center hover:border-orange-500 transition-all group">
+                    <i class="fa-solid fa-phone text-4xl text-orange-400 mb-4 block group-hover:scale-110 transition-transform"></i>
+                    <div class="font-black text-sm mb-1" style="font-family:'Rajdhani',sans-serif; color:#f97316;">CALL US</div>
+                    <div class="mono text-sm text-zinc-300">0713 496 692</div>
+                </a>
+                <a href="mailto:johnkaish37@gmail.com" class="card-dark rounded-2xl p-8 text-center hover:border-green-500 transition-all group">
+                    <i class="fa-solid fa-envelope text-4xl text-green-400 mb-4 block group-hover:scale-110 transition-transform"></i>
+                    <div class="font-black text-sm mb-1" style="font-family:'Rajdhani',sans-serif; color:#22c55e;">EMAIL US</div>
+                    <div class="mono text-xs text-zinc-300">johnkaish37@gmail.com</div>
+                </a>
+                <a href="https://wa.me/254713496692" target="_blank" class="card-dark rounded-2xl p-8 text-center hover:border-green-400 transition-all group">
+                    <i class="fa-brands fa-whatsapp text-4xl mb-4 block group-hover:scale-110 transition-transform" style="color:#25D366;"></i>
+                    <div class="font-black text-sm mb-1" style="font-family:'Rajdhani',sans-serif; color:#25D366;">WHATSAPP</div>
+                    <div class="mono text-sm text-zinc-300">0713 496 692</div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-10 mb-12">
+                <div class="col-span-2 md:col-span-1">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center font-black text-lg"
+                             style="background: linear-gradient(135deg, #1e3a8a, #0a1628); border: 2px solid #f97316;">
+                            <span style="color:#f97316;">J</span><span style="color:#22c55e;">K</span>
+                        </div>
+                        <div>
+                            <div class="font-black tracking-wide text-base" style="font-family:'Rajdhani',sans-serif; color:#22c55e;">JOHN KAISH</div>
+                            <div class="text-xs text-orange-400 mono">ELECTRONICS</div>
+                        </div>
+                    </div>
+                    <p class="text-zinc-500 text-sm">Engineering and Electronics Solutions across Kenya.</p>
+                    <div class="flex gap-3 mt-4">
+                        <a href="https://wa.me/254713496692" target="_blank" class="w-9 h-9 rounded-lg flex items-center justify-center text-sm transition-all hover:scale-110" style="background:#25D366;">
+                            <i class="fa-brands fa-whatsapp text-white"></i>
+                        </a>
+                        <a href="mailto:johnkaish37@gmail.com" class="w-9 h-9 rounded-lg flex items-center justify-center text-sm transition-all hover:scale-110" style="background:#f97316;">
+                            <i class="fa-solid fa-envelope text-white"></i>
+                        </a>
+                        <a href="tel:0713496692" class="w-9 h-9 rounded-lg flex items-center justify-center text-sm transition-all hover:scale-110" style="background:#1e40af;">
+                            <i class="fa-solid fa-phone text-white"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="mono text-xs text-zinc-500 mb-4 tracking-widest">SERVICES</div>
+                    <div class="space-y-2 text-sm text-zinc-400">
+                        <div class="hover:text-orange-400 cursor-pointer transition-colors">Phone Repair</div>
+                        <div class="hover:text-orange-400 cursor-pointer transition-colors">Laptop Repair</div>
+                        <div class="hover:text-orange-400 cursor-pointer transition-colors">Solar Systems</div>
+                        <div class="hover:text-orange-400 cursor-pointer transition-colors">CCTV Installation</div>
+                        <div class="hover:text-orange-400 cursor-pointer transition-colors">Electrical Works</div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="mono text-xs text-zinc-500 mb-4 tracking-widest">SHOP</div>
+                    <div class="space-y-2 text-sm text-zinc-400">
+                        <div class="hover:text-green-400 cursor-pointer transition-colors">Smartphones</div>
+                        <div class="hover:text-green-400 cursor-pointer transition-colors">Laptops</div>
+                        <div class="hover:text-green-400 cursor-pointer transition-colors">Audio Devices</div>
+                        <div class="hover:text-green-400 cursor-pointer transition-colors">Accessories</div>
+                        <div class="hover:text-green-400 cursor-pointer transition-colors">New Arrivals</div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="mono text-xs text-zinc-500 mb-4 tracking-widest">LOCATIONS</div>
+                    <div class="space-y-2 text-sm text-zinc-400">
+                        <div class="flex items-center gap-2"><span class="text-orange-400">●</span> Embu, Kenya</div>
+                        <div class="flex items-center gap-2"><span class="text-green-400">●</span> Murang'a, Kenya</div>
+                        <div class="flex items-center gap-2"><span class="text-blue-400">●</span> Nairobi, Kenya</div>
+                    </div>
+                    <div class="mt-4 text-xs mono" style="color:#22c55e;">Open Monday – Saturday</div>
+                    <div class="mt-2 text-xs mono text-zinc-500">0713 496 692</div>
+                </div>
+            </div>
+
+            <div class="divider mb-6"></div>
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-zinc-600 mono">
+                <div>© 2026 JOHN KAISH ELECTRONICS. ALL RIGHTS RESERVED.</div>
+                <div>INNOVATE <span class="tagline-dot">•</span> REPAIR <span class="tagline-dot">•</span> POWER <span class="tagline-dot">•</span> CONNECT</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Product Detail Modal -->
+    <div id="product-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="closeModal()"></div>
+        <div class="relative card-dark rounded-2xl max-w-lg w-full p-8 z-10">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-zinc-400 hover:text-white text-xl"><i class="fa-solid fa-xmark"></i></button>
+            <img id="modal-img" src="" class="w-full h-56 object-cover rounded-xl mb-6" alt="">
+            <div id="modal-cat" class="section-tag mb-2"></div>
+            <h3 id="modal-name" class="text-2xl font-black mb-2" style="font-family:'Rajdhani',sans-serif;"></h3>
+            <p id="modal-desc" class="text-zinc-400 text-sm mb-4"></p>
+            <div class="flex justify-between items-center">
+                <span id="modal-price" class="text-3xl font-black text-orange-glow" style="font-family:'Rajdhani',sans-serif;"></span>
+                <button id="modal-add-btn" class="btn-primary px-6 py-3">ADD TO CART</button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .filter-btn {
+            background: rgba(10,22,40,0.9);
+            border: 1px solid rgba(34,197,94,0.2);
+            color: #94a3b8;
+            transition: all 0.2s;
+            font-family: 'Share Tech Mono', monospace;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background: rgba(249,115,22,0.15);
+            border-color: #f97316;
+            color: #f97316;
+        }
+    </style>
+
+    <script>
+        const products = [
+            { id: 1, name: "Sony WH-1000XM6", price: 28500, priceUnit: "KES", category: "headphones", image: "https://picsum.photos/id/201/600/400", rating: 4.9, desc: "Industry-leading noise cancelling wireless headphones with 30hr battery life." },
+            { id: 2, name: "MacBook Pro 16\" M4", price: 320000, priceUnit: "KES", category: "laptops", image: "https://picsum.photos/id/180/600/400", rating: 5.0, desc: "Apple Silicon M4 chip. Blazing fast performance for professionals." },
+            { id: 3, name: "iPhone 16 Pro Max", price: 185000, priceUnit: "KES", category: "smartphones", image: "https://picsum.photos/id/251/600/400", rating: 4.8, desc: "Latest Apple flagship with A18 Pro chip and titanium build." },
+            { id: 4, name: "Samsung Galaxy Watch 7", price: 38000, priceUnit: "KES", category: "accessories", image: "https://picsum.photos/id/866/600/400", rating: 4.7, desc: "Advanced health tracking, GPS, and 3-day battery life." },
+            { id: 5, name: "Samsung Galaxy S25 Ultra", price: 175000, priceUnit: "KES", category: "smartphones", image: "https://picsum.photos/id/160/600/400", rating: 4.8, desc: "S Pen included. 200MP camera, Snapdragon 8 Elite." },
+            { id: 6, name: "JBL Flip 7", price: 12500, priceUnit: "KES", category: "headphones", image: "https://picsum.photos/id/119/600/400", rating: 4.6, desc: "Portable waterproof speaker with 12 hours of playtime." },
+            { id: 7, name: "Dell XPS 15 Laptop", price: 185000, priceUnit: "KES", category: "laptops", image: "https://picsum.photos/id/48/600/400", rating: 4.7, desc: "OLED display, Intel Core i9, 32GB RAM laptop." },
+            { id: 8, name: "USB-C Hub 7-in-1", price: 3500, priceUnit: "KES", category: "accessories", image: "https://picsum.photos/id/430/600/400", rating: 4.5, desc: "HDMI, USB 3.0, SD card, USB-C PD charging hub." }
+        ];
+
+        let cart = [];
+        let currentFilter = 'all';
+
+        function renderProducts(filter = 'all') {
+            const container = document.getElementById('products-grid');
+            container.innerHTML = '';
+            const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
+            filtered.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'product-card cursor-pointer';
+                card.innerHTML = `
+                    <div class="relative overflow-hidden">
+                        <img src="${product.image}" class="w-full h-56 object-cover transition-transform duration-500 hover:scale-105" alt="${product.name}">
+                        <div class="absolute top-3 left-3">
+                            <span class="px-3 py-1 rounded-full text-xs font-bold mono" style="background:rgba(249,115,22,0.85); color:white;">${product.category.toUpperCase()}</span>
+                        </div>
+                        <div class="absolute top-3 right-3 text-yellow-400 text-sm">★ ${product.rating}</div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-black text-lg mb-1" style="font-family:'Rajdhani',sans-serif;">${product.name}</h3>
+                        <p class="text-zinc-500 text-xs mb-4">${product.desc}</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-black text-orange-glow" style="font-family:'Rajdhani',sans-serif;">KES ${product.price.toLocaleString()}</span>
+                            <button onclick="addToCart(${product.id}); event.stopPropagation();"
+                                    class="btn-primary px-4 py-2 text-sm">
+                                <i class="fa-solid fa-cart-plus mr-1"></i>ADD
+                            </button>
+                        </div>
+                    </div>
+                `;
+                card.onclick = () => showModal(product);
+                container.appendChild(card);
+            });
+        }
+
+        function filterProducts(cat) {
+            currentFilter = cat;
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.cat === cat);
+            });
+            renderProducts(cat);
+        }
+
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            const existing = cart.find(i => i.id === id);
+            if (existing) existing.qty++;
+            else cart.push({ ...product, qty: 1 });
+            updateCartCount();
+            showToast(`${product.name} added to cart!`);
+        }
+
+        function updateCartCount() {
+            const total = cart.reduce((s, i) => s + i.qty, 0);
+            document.getElementById('cart-count').textContent = total;
+        }
+
+        function toggleCart() {
+            document.getElementById('cart-panel').classList.toggle('open');
+            document.getElementById('overlay-bg').classList.toggle('open');
+            renderCart();
+        }
+
+        function renderCart() {
+            const el = document.getElementById('cart-items');
+            const totalEl = document.getElementById('cart-total');
+            if (cart.length === 0) {
+                el.innerHTML = '<p class="text-zinc-500 mono text-sm">// Cart is empty</p>';
+                totalEl.classList.add('hidden');
+                return;
+            }
+            el.innerHTML = cart.map(item => `
+                <div class="flex gap-4 items-center p-3 rounded-xl" style="background:rgba(10,22,40,0.8); border:1px solid rgba(34,197,94,0.1);">
+                    <img src="${item.image}" class="w-16 h-16 object-cover rounded-lg" alt="">
+                    <div class="flex-1">
+                        <div class="font-bold text-sm" style="font-family:'Rajdhani',sans-serif;">${item.name}</div>
+                        <div class="text-orange-400 text-sm mono">KES ${item.price.toLocaleString()}</div>
+                        <div class="flex items-center gap-2 mt-2">
+                            <button onclick="changeQty(${item.id}, -1)" class="w-7 h-7 rounded-lg flex items-center justify-center text-sm" style="background:rgba(249,115,22,0.2); color:#f97316;">−</button>
+                            <span class="mono text-sm">${item.qty}</span>
+                            <button onclick="changeQty(${item.id}, 1)" class="w-7 h-7 rounded-lg flex items-center justify-center text-sm" style="background:rgba(249,115,22,0.2); color:#f97316;">+</button>
+                            <button onclick="removeFromCart(${item.id})" class="ml-auto text-zinc-600 hover:text-red-400 text-xs mono">remove</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+            document.getElementById('total-price').textContent = `KES ${total.toLocaleString()}`;
+            totalEl.classList.remove('hidden');
+        }
+
+        function changeQty(id, delta) {
+            const item = cart.find(i => i.id === id);
+            if (!item) return;
+            item.qty += delta;
+            if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
+            updateCartCount();
+            renderCart();
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(i => i.id !== id);
+            updateCartCount();
+            renderCart();
+        }
+
+        function closeAllPanels() {
+            document.getElementById('cart-panel').classList.remove('open');
+            document.getElementById('overlay-bg').classList.remove('open');
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('open');
+        }
+        function closeMobileMenu() {
+            document.getElementById('mobile-menu').classList.remove('open');
+        }
+
+        function showModal(product) {
+            document.getElementById('modal-img').src = product.image;
+            document.getElementById('modal-cat').textContent = product.category.toUpperCase();
+            document.getElementById('modal-name').textContent = product.name;
+            document.getElementById('modal-desc').textContent = product.desc;
+            document.getElementById('modal-price').textContent = `KES ${product.price.toLocaleString()}`;
+            document.getElementById('modal-add-btn').onclick = () => { addToCart(product.id); closeModal(); };
+            document.getElementById('product-modal').classList.remove('hidden');
+        }
+        function closeModal() {
+            document.getElementById('product-modal').classList.add('hidden');
+        }
+
+        function showToast(msg) {
+            const t = document.createElement('div');
+            t.className = 'fixed bottom-24 right-6 z-50 px-5 py-3 rounded-xl text-sm font-bold mono transition-all';
+            t.style.cssText = 'background:rgba(249,115,22,0.95); color:white; box-shadow: 0 8px 25px rgba(249,115,22,0.4);';
+            t.textContent = '✓ ' + msg;
+            document.body.appendChild(t);
+            setTimeout(() => t.remove(), 3000);
+        }
+
+        // Fade-in on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        window.onload = () => {
+            renderProducts();
+            // Re-observe after render
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        };
+    </script>
+</body>
+</html>
